@@ -1,0 +1,19 @@
+name: 'Setup Node.js Environment'
+description: 'Checks out repo and installs Node with caching'
+inputs:
+  node-version:
+    description: 'Node version to use'
+    required: false
+    default: '20'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'npm'
