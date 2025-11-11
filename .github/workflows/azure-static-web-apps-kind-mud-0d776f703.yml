@@ -40,6 +40,11 @@ jobs:
     name: Test and Build
     runs-on: ubuntu-latest
     needs: setup
+    environment: ${{
+      github.ref == 'refs/heads/main' && 'PROD' ||
+      github.ref == 'refs/heads/release' && 'STAGING' ||
+      github.ref == 'refs/heads/develop' && 'DEV'
+      }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-node
