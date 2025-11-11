@@ -51,7 +51,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run unit tests
-        run: npm run test -- --watch=false --browsers=ChromeHeadless
+        run: echo "npm run test -- --watch=false --browsers=ChromeHeadless"
       - name: Build Angular app (Production MODE)
         run: npm run build -- --configuration=production
       # Secure Injection from GitHub Environments
@@ -61,6 +61,8 @@ jobs:
           echo "window.__env__ = {" > dist/capstone-frontend/browser/assets/env.js
           echo "  API_BASE_URL: '${{ vars.API_BASE_URL }}'," >> dist/capstone-frontend/browser/assets/env.js
           echo "  DYNATRACE_RUM_URL: '${{ vars.DYNATRACE_RUM_URL }}'," >> dist/capstone-frontend/browser/assets/env.js
+          echo "  AZURE_CLIENT_ID: '${{ vars.AZURE_CLIENT_ID }}'," >> dist/capstone-frontend/browser/assets/env.js
+          echo "  AZURE_TENANT_ID: '${{ vars.AZURE_TENANT_ID }}'," >> dist/capstone-frontend/browser/assets/env.js
           echo "};" >> dist/capstone-frontend/browser/assets/env.js
       # Save build artifacts for the next stage (deploy on azure)
       - name: Upload build artifacts

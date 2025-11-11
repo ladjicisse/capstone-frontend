@@ -22,6 +22,18 @@ export class EnvService {
     return this.config.DYNATRACE_RUM_URL;
   }
 
+  getApiBaseUrl(): string {
+    return this.config.API_BASE_URL;
+  }
+
+  getAzureClientId(): string {
+    return this.config.AZURE_CLIENT_ID;
+  }
+
+  getAzureTenantId(): string {
+    return this.config.AZURE_TENANT_ID;
+  }
+
   private injectDynamicRumScript(): void {
 
     if(this.isDynamicRumEnabled) return;
