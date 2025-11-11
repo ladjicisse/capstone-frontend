@@ -48,7 +48,7 @@ jobs:
       - name: Run unit tests
         run: npm run test -- --watch=false --browsers=ChromeHeadless
       - name: Build Angular app (Production MODE)
-        run: npm run build -- --configuration production --if-present
+        run: npm run build -- --configuration=production
       # Secure Injection from GitHub Environments
       - name: Generate runtime environment config
         run: |
