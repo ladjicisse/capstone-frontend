@@ -47,9 +47,17 @@ jobs:
         run: npm ci
       - name: Run unit tests
         run: npm run test -- --watch=false --browsers=ChromeHeadless
-      - name: Build Angular app
-        run: npm run build --if-present
-      # Save build artifacts for next stage (deploy on azure)
+      - name: Build Angular app (Production MODE)
+        run: npm run build -- --configuration production --if-present
+      # Secure Injection from GitHub Environments
+      - name: Generate runtime environment config
+        run: |
+          mkdir -p dist/capstone-frontend/browser/assets
+          echo "window.__env__ = {" > dist/capstone-frontend/browser/assets/env.js
+          echo "  API_BASE_URL: '${{ vars.API_BASE_URL }}'," >> dist/capstone-frontend/browser/assets/env.js
+          echo "  DYNATRACE_RUM_URL: '${{ vars.DYNATRACE_RUM_URL }}'," >> dist/capstone-frontend/browser/assets/env.js
+          echo "};" >> dist/capstone-frontend/browser/assets/env.js
+      # Save build artifacts for the next stage (deploy on azure)
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -97,7 +105,7 @@ jobs:
     steps:
       - name: Curl the deployed app
         run: |
-          echo "Checking availability of $WEBAPP_URL on $ENV_NAME..."
+          echo "Checking availability of $WEBAPP_URL on $ENV_NAME ..."
           for i in {1..5}; do
             if curl -s -o /dev/null -w "%{http_code}" "$WEBAPP_URL" | grep -q "200"; then
               echo "✅ Site is live!"
