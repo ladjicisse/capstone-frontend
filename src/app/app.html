@@ -1,17 +1,14 @@
 <div class="app-container">
   <header>
-    <div class="logo">{{title()}}</div>
+    <div class="logo"><a aria-label="{{title()}}" routerLink="/">{{title()}}</a></div>
     <div class="search">
-      <input type="text" placeholder="Search products..." />
+      <input aria-label="Search products" type="text" placeholder="Search products..." />
     </div>
     <nav class="nav-links">
-      <a routerLink="/">Home</a>
-      <a routerLink="/products">Products</a>
-    </nav>
-    <nav class="nav-links">
       @if(currentAccount$ | async; as account) {
+        <a routerLink="/products">Products</a>
         <a
-          aria-label="Logout"
+          aria-label="bonjour M.(Mme) {{ account.name }}"
           rel="noopener"
           routerLink="/profile"
         >
@@ -41,4 +38,17 @@
   <main>
     <router-outlet></router-outlet>
   </main>
+
+  <footer>
+    <div class="footer-left">
+      <div class="logo"><a aria-label="Ladji Cissé" target="_blank" href="https://ladjicisse.com">Ladji Cissé</a></div>
+      <span>© 2025 All rights reserved</span>
+    </div>
+
+    <div class="footer-links">
+      <a aria-label="Privacy" routerLink="/">Privacy Policy</a>
+      <a aria-label="Help" routerLink="/">Help</a>
+      <a aria-label="Source codes" href="https://github.com/ladjicisse/capstone-frontend" target="_blank">Source codes</a>
+    </div>
+  </footer>
 </div>

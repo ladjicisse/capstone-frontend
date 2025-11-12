@@ -1,4 +1,3 @@
-
 .app-container {
   display: flex;
   flex-direction: column;
@@ -13,8 +12,8 @@
 
     .logo {
       font-weight: $font-weight-bold;
-      font-size: 1.70rem;
-     letter-spacing: .2rem;
+      font-size: 1.75rem;
+      letter-spacing: .15rem;
       color: $color-primary;
     }
 
@@ -65,5 +64,9 @@
   main {
     flex: 1;
     padding: $space-lg $space-xl;
+  }
+
+  footer {
+    margin-top: auto;
   }
 }

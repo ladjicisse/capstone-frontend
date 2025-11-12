@@ -1,7 +1,11 @@
 <div>
-
-<p>Profile!</p>
+  <h2>Profile!</h2>
   <pre>
-    {{userProfile | json}}
+    @if(userProfile) {
+      {{ userProfile | json }}
+    }
+    @else {
+      loading...
+    }
   </pre>
 </div>
