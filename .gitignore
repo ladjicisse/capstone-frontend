@@ -7,8 +7,7 @@
 /bazel-out
 
 # Locals
-public/assets/env.local.js
-/public/assets/env.local.js
+*.local.js
 
 
 # Node
