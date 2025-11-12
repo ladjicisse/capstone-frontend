@@ -41,7 +41,7 @@ export class EnvService {
     const dynatraceRumUrl = this.config.DYNATRACE_RUM_URL;
 
     if (!dynatraceRumUrl) {
-      console.error('Dynamic RUM URL is not configured');
+      console.log('Dynamic RUM URL is not configured');
       return;
     }
 

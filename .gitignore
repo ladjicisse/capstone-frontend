@@ -42,5 +42,5 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-public/assets/env.local.js
-src/assets/env.local.js
+/public/assets/env.local.js
+/assets/env.local.js

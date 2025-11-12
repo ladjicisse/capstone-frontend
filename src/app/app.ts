@@ -1,39 +1,31 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {EnvService} from './services/env.service';
-import {MsalService} from '@azure/msal-angular';
+import {RouterLink, RouterOutlet} from '@angular/router';
+import {AuthService} from './services/auth.service';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink, AsyncPipe],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
-  protected readonly title = signal('capstone-frontend');
-  public userInfo:any = {};
-  private envService = inject(EnvService);
-  private msalService = inject(MsalService);
+  protected readonly title = signal('biojus');
+  private authService = inject(AuthService);
+
+  protected readonly currentAccount$ = this.authService.getCurrentAccount$();
 
   async ngOnInit() {
-    await this.msalService.instance.initialize(); // ✅ safety call
-    this.envService.logConfig();
-    const result = await this.msalService.instance.handleRedirectPromise();
-    if (result && result.account) {
-      this.userInfo = result.account;
-      this.msalService.instance.setActiveAccount(result.account);
-    }
+    this.currentAccount$.subscribe(account => {
+      console.log('Current Account:', account?.name);
+    })
   }
 
   login(): void {
-    this.msalService.loginRedirect();
+    this.authService.login();
   }
 
   logout(): void {
-    this.msalService.logoutRedirect({ postLogoutRedirectUri: '/'});
-  }
-
-  isAuthenticated(): boolean {
-    return this.msalService.instance.getActiveAccount() !== null;
+    this.authService.logout();
   }
 }

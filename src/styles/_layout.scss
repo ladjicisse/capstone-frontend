@@ -1,0 +1,69 @@
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  header {
+    @include flex-center(row, $space-lg);
+    justify-content: space-between;
+    background: white;
+    border-bottom: 1px solid $color-border;
+    padding: $space-md $space-xl;
+
+    .logo {
+      font-weight: $font-weight-bold;
+      font-size: 1.70rem;
+     letter-spacing: .2rem;
+      color: $color-primary;
+    }
+
+    .search {
+      flex: 1;
+      max-width: 500px;
+
+      input {
+        width: 100%;
+        padding: $space-sm $space-md;
+        border-radius: 6px;
+        border: 1px solid $color-border;
+        font-size: 0.95rem;
+
+        &:focus {
+          outline: none;
+          border-color: $color-primary;
+          box-shadow: 0 0 0 2px rgba($color-primary, 0.15);
+        }
+      }
+    }
+
+    .nav-links {
+      @include flex-center(row, $space-md);
+
+      a {
+        padding: $space-xs $space-sm;
+        color: $color-text;
+        font-weight: $font-weight-bold;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
+
+    @include respond(md) {
+      flex-direction: column;
+      align-items: stretch;
+
+      .search {
+        order: 3;
+        margin-top: $space-md;
+      }
+    }
+  }
+
+  main {
+    flex: 1;
+    padding: $space-lg $space-xl;
+  }
+}

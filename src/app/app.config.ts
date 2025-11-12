@@ -39,7 +39,7 @@ export const appConfig: ApplicationConfig = {
       provide: MSAL_INTERCEPTOR_CONFIG,
       useValue: msalInterceptorConfig
     },
-   // MsalBroadcastService,
+    MsalBroadcastService,
     MsalGuard,
     MsalService,
     {provide: HTTP_INTERCEPTORS, useClass: MsalInterceptor, multi: true},
