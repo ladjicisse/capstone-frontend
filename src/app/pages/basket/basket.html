@@ -1,0 +1,65 @@
+<div class="basket container">
+
+  <h2 class="page-title">Your Basket</h2>
+
+  <!-- Empty basket -->
+  @if(items.length === 0) {
+  <div class="empty">
+    <p>Your basket is empty.</p>
+  </div>
+  }
+
+  <!-- Basket items -->
+  @if(items.length > 0) {
+    <div class="basket-list">
+
+    @for(item of items; track $index; let i = $index) {
+      <div class="basket-item">
+
+      <img [src]="item.product.image"
+           [alt]="item.product.name"
+           class="item-photo" />
+
+      <div class="item-info">
+        <h3 class="item-title">{{ item.product.name }}</h3>
+        <p class="item-price">{{ item.product.price | currency }}</p>
+
+        <div class="qty-controls">
+          <button class="qty-btn" (click)="decreaseQty(i)">−</button>
+
+          <input type="number"
+                 [(ngModel)]="item.quantity"
+                 readonly
+                 class="qty-input" />
+
+          <button class="qty-btn" (click)="increaseQty(i)">+</button>
+        </div>
+      </div>
+
+      <div class="item-total">
+        {{ item.product.price * item.quantity | currency }}
+      </div>
+
+      <button class="remove-btn" (click)="removeItem(i)">✕</button>
+    </div>
+    }
+    <!-- Summary -->
+    <div class="basket-summary">
+      <div class="line">
+        <span>Subtotal:</span>
+        <span>{{ subtotal | currency }}</span>
+      </div>
+
+      <div class="line total">
+        <span>Total:</span>
+        <span>{{ subtotal | currency }}</span>
+      </div>
+
+      <button class="btn-primary pay-btn" (click)="payNow()">
+        Proceed to Payment
+      </button>
+    </div>
+
+  </div>
+  }
+</div>

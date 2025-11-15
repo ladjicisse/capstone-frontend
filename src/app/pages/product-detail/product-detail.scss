@@ -35,7 +35,6 @@
 
       .product-image {
         width: 100%;
-        height: auto;
         max-height: 420px;
         object-fit: cover;
         border-radius: 10px;
@@ -52,37 +51,67 @@
       .title {
         font-size: 2rem;
         font-weight: $font-weight-bold;
-        color: $color-text;
       }
 
       .description {
-        font-size: 1rem;
         color: #555;
-        line-height: 1.6;
       }
 
       .price {
-        margin: $space-md 0;
         font-size: 1.8rem;
-        font-weight: $font-weight-bold;
         color: $color-primary;
+        font-weight: $font-weight-bold;
       }
 
-      .btn-primary {
-        background: $color-primary;
-        color: #fff;
-        padding: $space-md $space-lg;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 1rem;
-        width: fit-content;
-        margin-top: $space-sm;
-        transition: background 0.2s ease;
+      /* Quantity Form */
+      .quantity-form {
+        margin-top: $space-md;
 
-        &:hover {
-          background: darken($color-primary, 8%);
+        label {
+          font-weight: $font-weight-bold;
+          display: block;
+          margin-bottom: $space-xs;
         }
+
+        .qty-controls {
+          display: flex;
+          align-items: center;
+          gap: $space-sm;
+
+          .qty-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid $color-border;
+            border-radius: 6px;
+            background: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+
+            &:hover {
+              background: $color-bg;
+            }
+          }
+
+          .qty-input {
+            width: 60px;
+            padding: $space-xs;
+            text-align: center;
+            border-radius: 6px;
+            border: 1px solid $color-border;
+
+            &:focus {
+              outline: none;
+              border-color: $color-primary;
+              box-shadow: 0 0 0 2px rgba($color-primary, 0.15);
+            }
+          }
+        }
+      }
+
+      .add-btn {
+        margin-top: $space-md;
+        padding: $space-md $space-xl;
+        font-size: 1rem;
       }
     }
   }
