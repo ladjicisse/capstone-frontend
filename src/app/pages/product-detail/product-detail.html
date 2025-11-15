@@ -1,0 +1,38 @@
+@if(product){
+  <div class="product-detail container">
+
+    <div class="detail-header">
+      <button class="back-btn" (click)="goBack()">← Back</button>
+    </div>
+
+    <div class="detail-content">
+
+      <!-- Left: product photo -->
+      <div class="image-wrapper">
+        <img [src]="product.photo"
+             [alt]="product.title"
+             class="product-image" />
+      </div>
+
+      <!-- Right: text + price + action -->
+      <div class="info-wrapper">
+        <h2 class="title">{{ product.title }}</h2>
+
+        <p class="description">
+          {{ product.description }}
+        </p>
+
+        <div class="price">
+          {{ product.price | currency }}
+        </div>
+
+        <button (click)="buyProduct(product.id)" class="btn-primary">
+          Buy now
+        </button>
+      </div>
+
+    </div>
+  </div>
+} @else {
+  <p>Loading...<p>
+}

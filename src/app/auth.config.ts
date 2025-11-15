@@ -21,13 +21,13 @@ export const provideMsal =  async (envService: EnvService) => {
 }
 
 export const msalGuardConfig: MsalGuardConfiguration = {
-  interactionType: InteractionType.Redirect, // Popup or Redirect
+  interactionType: InteractionType.Popup, // Popup or Redirect
   authRequest: { scopes: ['User.Read'] },
   loginFailedRoute: '/',
 };
 
 export const msalInterceptorConfig: MsalInterceptorConfiguration = {
-  interactionType: InteractionType.Redirect, // Poup or Redirect
+  interactionType: InteractionType.Popup, // Poup or Redirect
   protectedResourceMap: new Map([
     ['https://graph.microsoft.com/v1.0/me', ['User.Read']],
   ]),
