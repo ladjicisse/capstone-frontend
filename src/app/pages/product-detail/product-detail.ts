@@ -4,6 +4,7 @@ import {CurrencyPipe} from '@angular/common';
 import {ProductModel} from '../../models/product.model';
 import {FormsModule} from '@angular/forms';
 import {BasketStore} from '../../store/basket.store';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -21,23 +22,14 @@ export class ProductDetail {
 
   constructor(
     private route: ActivatedRoute,
-    //private productService: ProductService,
-    //private basketService: BasketService,
+    private productService: ProductService,
     private basketStore: BasketStore,
     private router: Router
   ) {}
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    //this.product = this.productService.getProductById(id);
-    this.product.set({
-      id: id,
-      name: 'Orange',
-      type: 'Detox',
-      description: 'Jus d\'orange',
-      price: 3.50,
-      image: 'products/orange.jpg'
-    });
+    this.product.set(this.productService.getProductById(id) || null);
   }
 
   increaseQty() {

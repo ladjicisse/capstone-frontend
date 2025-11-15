@@ -2,7 +2,13 @@
   <header>
     <div class="logo"><a aria-label="{{title()}}" routerLink="/">{{title()}}</a></div>
     <div class="search">
-      <input aria-label="Search products" type="text" placeholder="Search products..." />
+      <input aria-label="Search products"
+             type="text"
+             placeholder="Search products..."
+             [value]="searchTerm()"
+             (input)="onSearch($event)"
+
+      />
     </div>
     <nav class="nav-links">
       <a routerLink="/basket" class="basket-icon">
