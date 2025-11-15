@@ -1,19 +1,19 @@
 <div class="basket container">
 
-  <h2 class="page-title">Your Basket</h2>
+  <h2 class="page-title">Mon Panier</h2>
 
   <!-- Empty basket -->
-  @if(items.length === 0) {
+  @if(items().length === 0) {
   <div class="empty">
-    <p>Your basket is empty.</p>
+    <p>Ton panier est vide.</p>
   </div>
   }
 
   <!-- Basket items -->
-  @if(items.length > 0) {
+  @if(items().length > 0) {
     <div class="basket-list">
 
-    @for(item of items; track $index; let i = $index) {
+    @for(item of items(); track $index; let i = $index) {
       <div class="basket-item">
 
       <img [src]="item.product.image"
@@ -47,12 +47,12 @@
     <div class="basket-summary">
       <div class="line">
         <span>Subtotal:</span>
-        <span>{{ subtotal | currency }}</span>
+        <span>{{ totalAmount() | currency }}</span>
       </div>
 
       <div class="line total">
         <span>Total:</span>
-        <span>{{ subtotal | currency }}</span>
+        <span>{{ totalAmount() | currency }}</span>
       </div>
 
       <button class="btn-primary pay-btn" (click)="payNow()">

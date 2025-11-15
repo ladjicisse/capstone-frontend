@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CurrencyPipe} from '@angular/common';
 import {ProductModel} from '../../models/product.model';
 import {FormsModule} from '@angular/forms';
-import {BasketService} from '../../services/basket.service';
+import {BasketStore} from '../../store/basket.store';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,7 +14,7 @@ import {BasketService} from '../../services/basket.service';
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.scss',
 })
-class ProductDetail {
+export class ProductDetail {
   public product = signal<ProductModel | null>(null);
   public quantity = signal(0);
  // private ProductType: "Detox" | "Hydration" | "Vitamins";
@@ -22,7 +22,8 @@ class ProductDetail {
   constructor(
     private route: ActivatedRoute,
     //private productService: ProductService,
-    private basketService: BasketService,
+    //private basketService: BasketService,
+    private basketStore: BasketStore,
     private router: Router
   ) {}
 
@@ -53,21 +54,12 @@ class ProductDetail {
   }
 
   addToBasket() {
-    this.basketService.add({
-      product: this.product() as ProductModel,
-      quantity: this.quantity()
-    });
+    this.basketStore.add(this.product() as ProductModel, this.quantity());
 
     console.log("Added to basket:", this.product()?.name, "x", this.quantity());
   }
 
   goBack() {
-    this.router.navigate(['/products']);
-  }
-
-  buyProduct(id: number) {
-    console.log("Buying product:", id);
+    this.router.navigate(['/']);
   }
 }
-
-export default ProductDetail

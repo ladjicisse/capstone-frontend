@@ -1,7 +1,8 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, OnInit, signal} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {AuthService} from './services/auth.service';
 import {AsyncPipe} from '@angular/common';
+import {BasketStore} from './store/basket.store';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,16 @@ import {AsyncPipe} from '@angular/common';
 export class App implements OnInit {
   protected readonly title = signal('biojus');
   private authService = inject(AuthService);
+  protected basketStore = inject(BasketStore);
+
+  protected basketItemsCount = computed(() => this.basketStore.itemsCount());
 
   protected readonly currentAccount$ = this.authService.getCurrentAccount$();
 
   async ngOnInit() {
     this.currentAccount$.subscribe(account => {
       console.log('Current Account:', account?.name);
-    })
+    });
   }
 
   login(): void {

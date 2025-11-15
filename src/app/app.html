@@ -5,9 +5,11 @@
       <input aria-label="Search products" type="text" placeholder="Search products..." />
     </div>
     <nav class="nav-links">
+      <a routerLink="/basket" class="basket-icon">
+        🛒
+        <span class="count">{{ basketItemsCount() }}</span>
+      </a>
       @if(currentAccount$ | async; as account) {
-        <a routerLink="/products">Products</a>
-        <a routerLink="/basket">Panier</a>
         <a
           aria-label="bonjour M.(Mme) {{ account.name }}"
           rel="noopener"

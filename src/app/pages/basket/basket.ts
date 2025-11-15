@@ -1,8 +1,8 @@
-import {Component, inject} from '@angular/core';
-import {BasketService} from '../../services/basket.service';
+import {Component, computed, inject} from '@angular/core';
 import {BasketModel} from '../../models/basket.model';
 import {CurrencyPipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {BasketStore} from '../../store/basket.store';
 
 @Component({
   selector: 'app-basket',
@@ -14,41 +14,34 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './basket.scss',
 })
 export class Basket {
-  basketService = inject(BasketService);
+  basketStore = inject(BasketStore)
 
-  items: BasketModel[] = this.basketService.getItems();
-  subtotal = 0;
-
-  ngOnInit() {
-    this.calculateTotal();
-  }
-
-  calculateTotal() {
-    this.subtotal = this.items
-      .map(i => i.product.price * i.quantity)
-      .reduce((a, b) => a + b, 0);
-  }
+  items = computed(()=> this.basketStore.items());// signal
+  totalAmount = computed( () => this.basketStore.totalAmount());   // computed
 
   increaseQty(i: number) {
-    this.items[i].quantity++;
-    this.calculateTotal();
+    const item = this.items()[i];
+    this.basketStore.updateQuantity(i, item.quantity + 1);
   }
 
   decreaseQty(i: number) {
-    if (this.items[i].quantity > 1) {
-      this.items[i].quantity--;
+    const item = this.items()[i];
+    if (item.quantity > 1) {
+      this.basketStore.updateQuantity(i, item.quantity - 1);
     }
-    this.calculateTotal();
   }
 
   updateQty(i: number, value: number) {
-    this.items[i].quantity = Math.max(1, Number(value));
-    this.calculateTotal();
+    const qty = Math.max(1, Number(value));
+    this.basketStore.updateQuantity(i, qty);
   }
 
   removeItem(i: number) {
-    this.items.splice(i, 1);
-    this.calculateTotal();
+    this.basketStore.remove(i);
+  }
+
+  removeAllItems() {
+    this.basketStore.clear();
   }
 
   payNow() {
