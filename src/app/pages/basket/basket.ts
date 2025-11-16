@@ -1,18 +1,18 @@
 import {Component, computed, inject} from '@angular/core';
-import {BasketModel} from '../../models/basket.model';
 import {CurrencyPipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {BasketStore} from '../../store/basket.store';
-import {ProductPipe} from '../../pipes/product.pipe';
 import {SearchService} from '../../services/search.service';
 import {BasketPipe} from '../../pipes/basket.pipe';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-basket',
   imports: [
     FormsModule,
     CurrencyPipe,
-    BasketPipe
+    BasketPipe,
+    RouterLink
   ],
   templateUrl: './basket.html',
   styleUrl: './basket.scss',
@@ -20,6 +20,7 @@ import {BasketPipe} from '../../pipes/basket.pipe';
 export class Basket {
   basketStore = inject(BasketStore)
   searchService = inject(SearchService);
+  private router: Router = inject(Router);
 
   items = computed(()=> this.basketStore.items());// signal
   totalAmount = computed( () => this.basketStore.totalAmount());   // computed
@@ -49,6 +50,10 @@ export class Basket {
 
   removeAllItems() {
     this.basketStore.clear();
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 
   payNow() {

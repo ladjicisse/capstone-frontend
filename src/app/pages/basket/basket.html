@@ -1,11 +1,13 @@
 <div class="basket container">
 
-  <h2 class="page-title">Mon Panier</h2>
+  <h2 class="page-title">Panier</h2>
 
   <!-- Empty basket -->
   @if(items().length === 0) {
   <div class="empty">
     <p>Ton panier est vide.</p>
+    <br />
+    <a routerLink="/">Je retourne à la liste de produits</a>
   </div>
   }
 
@@ -55,8 +57,8 @@
         <span>{{ totalAmount() | currency }}</span>
       </div>
 
-      <button class="btn-primary pay-btn" (click)="payNow()">
-        Proceed to Payment
+      <button class="btn-primary btn-primary" (click)="payNow()">
+        Confirmer ma commande
       </button>
     </div>
 
