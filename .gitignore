@@ -10,6 +10,8 @@
 env.local.js
 assets/env.local.js
 public/assets/env.local.js
+public/assets/test-rum.js
+public/assets/dynatrace-dev-rum.js
 
 
 # Node
