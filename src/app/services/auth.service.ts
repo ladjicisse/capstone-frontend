@@ -3,6 +3,7 @@ import {BehaviorSubject, filter, Observable} from 'rxjs';
 import {AccountInfo, InteractionStatus} from '@azure/msal-browser';
 import {MsalBroadcastService, MsalService} from '@azure/msal-angular';
 import {HttpClient} from '@angular/common/http';
+import {EnvService} from './env.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class AuthService {
   constructor(
     private msalService: MsalService,
     private msalBroadcastService: MsalBroadcastService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private envService: EnvService
   ) {
     // Initialize the MSAL Broadcast Service
     this.msalService.initialize()
@@ -22,6 +24,7 @@ export class AuthService {
         const result = await this.msalService.instance.handleRedirectPromise();
         if (result && result.account) {
           this.msalService.instance.setActiveAccount(result.account);
+          this.currentAccount.next(result.account);
         }
       });
 
@@ -43,10 +46,14 @@ export class AuthService {
   }
 
   logout(): void {
-    this.msalService.logoutRedirect({ postLogoutRedirectUri: '/'});
+    this.msalService.logoutRedirect({ postLogoutRedirectUri: this.envService.getWebAppUrl()});
   }
 
   getCurrentAccount$(): Observable<AccountInfo | null> {
-    return this.currentAccount.asObservable();
+    return this.currentAccount.asObservable() || this.msalService.instance.getActiveAccount();
+  }
+
+  getCurrentAccount(): AccountInfo | null {
+    return this.msalService.instance.getActiveAccount();
   }
 }

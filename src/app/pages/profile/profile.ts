@@ -1,13 +1,10 @@
 import {Component, OnInit, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {AccountInfo} from '@azure/msal-browser';
-import {JsonPipe} from '@angular/common';
 import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-profile',
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })

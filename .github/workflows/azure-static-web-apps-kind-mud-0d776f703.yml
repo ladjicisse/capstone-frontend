@@ -59,6 +59,7 @@ jobs:
         run: |
           mkdir -p dist/capstone-frontend/browser/assets
           echo "window.__env__ = {" > dist/capstone-frontend/browser/assets/env.js
+          echo "  WEBAPP_URL: '${{ vars.WEBAPP_URL }}'," >> dist/capstone-frontend/browser/assets/env.js
           echo "  API_BASE_URL: '${{ vars.API_BASE_URL }}'," >> dist/capstone-frontend/browser/assets/env.js
           echo "  DYNATRACE_RUM_URL: '${{ vars.DYNATRACE_RUM_URL }}'," >> dist/capstone-frontend/browser/assets/env.js
           echo "  AZURE_CLIENT_ID: '${{ vars.AZURE_CLIENT_ID }}'," >> dist/capstone-frontend/browser/assets/env.js

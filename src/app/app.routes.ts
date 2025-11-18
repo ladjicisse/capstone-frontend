@@ -1,16 +1,11 @@
 import { Routes } from '@angular/router';
-import {Home} from './pages/home/home';
 import {MsalGuard} from '@azure/msal-angular';
-import {Register} from './pages/register/register';
 import {anonymousGuard} from './guards/anonymous.guard';
-import {ProductDetail} from './pages/product-detail/product-detail';
-import {Basket} from './pages/basket/basket';
 
 export const routes: Routes = [
-  { path: '', component: Home },
-  { path: 'register', component: Register, canActivate: [anonymousGuard] },
-  //{ path: 'products', loadComponent: () => import('./pages/products/products').then(m => m.Products) },
-  { path: 'products/:id', component: ProductDetail },
+  { path: '', loadComponent: () => import('./pages/home/home').then(m => m.Home)},
+  { path: 'register', loadComponent: () => import('./pages/register/register').then(m => m.Register), canActivate: [anonymousGuard]},
+  { path: 'products/:id', loadComponent: () => import('./pages/product-detail/product-detail').then(m => m.ProductDetail) },
   { path: 'profile', loadComponent: () => import('./pages/profile/profile').then(m => m.Profile), canActivate: [MsalGuard] },
-  { path: 'basket', component: Basket }
+  { path: 'basket', loadComponent: () => import('./pages/basket/basket').then(m => m.Basket) }
 ];

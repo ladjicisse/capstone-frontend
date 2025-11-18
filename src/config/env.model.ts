@@ -1,4 +1,5 @@
 export interface IEnvConfig {
+  WEBAPP_URL: string;
   API_BASE_URL: string;
   DYNATRACE_RUM_URL: string;
   AZURE_CLIENT_ID: string;

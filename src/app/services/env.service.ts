@@ -26,6 +26,10 @@ export class EnvService {
     return this.config.API_BASE_URL;
   }
 
+  getWebAppUrl(): string {
+    return this.config.WEBAPP_URL;
+  }
+
   getAzureClientId(): string {
     return this.config.AZURE_CLIENT_ID;
   }
