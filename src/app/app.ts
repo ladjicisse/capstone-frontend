@@ -1,11 +1,12 @@
 import {Component, computed, inject, OnInit, signal} from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {AuthService} from './services/auth.service';
 import {AsyncPipe} from '@angular/common';
 import {BasketStore} from './store/basket.store';
 import {FormsModule} from '@angular/forms';
 import {SearchService} from './services/search.service';
 import {MsalService} from '@azure/msal-angular';
+import {filter} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,16 @@ export class App implements OnInit {
   private searchService = inject(SearchService);
   protected basketStore = inject(BasketStore);
   private msalService = inject(MsalService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
 
   protected searchTerm = computed(() => this.searchService.query());
 
   protected basketItemsCount = computed(() => this.basketStore.itemsCount());
 
   protected readonly currentAccount$ = this.authService.getCurrentAccount$();
+
+  protected hideSearch = false;
 
   // async ngOnInit() {
   //
@@ -50,6 +55,13 @@ export class App implements OnInit {
       },
       error: (error) => console.log(error)
     });
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      const child = this.activatedRoute.firstChild;
+      this.hideSearch = child?.snapshot.data['hideSearch'] ?? false;
+    })
   }
 
   onSearch(event: any) {

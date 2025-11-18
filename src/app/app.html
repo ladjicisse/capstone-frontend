@@ -1,6 +1,7 @@
 <div class="app-container">
   <header>
     <div class="logo"><a aria-label="{{title()}}" routerLink="/">{{title()}}</a></div>
+    @if(!hideSearch) {
     <div class="search">
       <input aria-label="Recherche products..."
              type="text"
@@ -9,6 +10,7 @@
              (input)="onSearch($event)"
       />
     </div>
+    }
     <nav class="nav-links">
       <a routerLink="/basket"  routerLinkActive="active" class="basket-icon">
         🛒
