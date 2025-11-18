@@ -2,7 +2,7 @@
   <div class="product-detail container">
 
     <div class="detail-header">
-      <button class="back-btn" (click)="goBack()">← Back</button>
+      <button class="back-btn" (click)="goBack()">← Retour</button>
     </div>
 
     <div class="detail-content">
@@ -24,7 +24,7 @@
 
         <!-- Quantity selector -->
         <div class="quantity-form">
-          <label>Quantity</label>
+          <label>Quantité</label>
 
           <div class="qty-controls">
             <button (click)="decreaseQty()" class="qty-btn">−</button>
@@ -41,12 +41,12 @@
         <!-- Add to basket -->
         <button (click)="addToBasket()"
                 class="btn-primary add-btn">
-          Add to basket
+          Ajouter au panier
         </button>
       </div>
     </div>
   </div>
 }
 @else {
-  <p>Loading...<p>
+  <p>Chargement...<p>
 }

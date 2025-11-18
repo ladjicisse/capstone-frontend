@@ -1,16 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MsalService } from '@azure/msal-angular';
+import {map} from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class UsersService {
+export class UserService {
 
-  graphEndpoint = 'https://graph.microsoft.com/v1.0/users';
+  graphEndpoint = 'https://graph.microsoft.com/v1.0';
 
   constructor(
     private http: HttpClient,
     private msalService: MsalService
   ) {}
+
+  getProfile() {
+    return this.http.get<any>(this.graphEndpoint + '/me').pipe(
+      map(user => ({
+        id: user.id,
+        displayName: user.displayName,
+        givenName: user.givenName,
+        surname: user.surname,
+        email: user.mail ?? user.userPrincipalName
+      }))
+    );
+  }
 
   async createUser(user: {
     displayName: string;
@@ -49,6 +62,6 @@ export class UsersService {
     };
 
     // 3. Call Graph API
-    return this.http.post(this.graphEndpoint, body, { headers }).toPromise();
+    return this.http.post(this.graphEndpoint + '/users', body, { headers }).toPromise();
   }
 }

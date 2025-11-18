@@ -10,6 +10,7 @@
     margin-bottom: 20px;
   }
 
+
   .form-group {
     margin-bottom: 20px;
 
@@ -21,16 +22,30 @@
 
     input {
       width: 100%;
-      padding: 10px;
-      border: 1px solid $color-border;
+      padding: $space-sm $space-md;
       border-radius: 6px;
+      border: 1px solid $color-border;
+      font-size: 0.95rem;
 
       &:focus {
+        outline: none;
         border-color: $color-primary;
+        box-shadow: 0 0 0 2px rgba($color-primary, 0.15);
       }
     }
 
-    .btn-primary {
+    .disabled-btn {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background: $color-disabled;
+      color: #fff;
+      padding: $space-sm $space-md;
+      border-radius: 6px;
+      border: none;
+      transition: background 0.2s;
+    }
+
+    .active-btn {
       background: $color-primary;
       color: #fff;
       padding: $space-sm $space-md;

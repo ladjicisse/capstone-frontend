@@ -1,11 +1,17 @@
 <div>
   <h2>Profile!</h2>
-  <pre>
-    @if(userProfile) {
-      {{ userProfile | json }}
+  <div>
+    @if(!loading() && user()) {
+      <div class="profile-card">
+        <p><strong>Name:</strong> {{ user().displayName }}</p>
+        <p><strong>Firstname:</strong> {{ user().givenName }}</p>
+        <p><strong>Lastname:</strong> {{ user().surname }}</p>
+        <p><strong>Email:</strong> {{ user().email }}</p>
+        <p><strong>User ID:</strong> {{ user().id }}</p>
+      </div>
     }
     @else {
       loading...
     }
-  </pre>
+  </div>
 </div>

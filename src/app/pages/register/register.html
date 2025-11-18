@@ -1,30 +1,93 @@
 <div class="register container">
   <h2>Création de compte</h2>
 
-  <form (ngSubmit)="register()">
+  <form [formGroup]="registerForm" (ngSubmit)="register()" class="form">
     <div class="form-group">
-      <label>Nome</label>
-      <input [(ngModel)]="displayName" name="displayName" required />
+      <label>Nom</label>
+      <input formControlName="lastname" name="lastName" required />
+      @if(lastname?.touched && lastname?.hasError('required')){
+        <p class="error">
+          Le nom est requis
+        </p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Prénom</label>
+      <input formControlName="firstname" name="firstName" required />
+
+      @if(firstname?.touched && firstname?.hasError('required')){
+        <p class="error">
+          Le prenom est requis
+        </p>
+      }
     </div>
 
     <div class="form-group">
       <label>Email</label>
-      <input [(ngModel)]="email" name="email" required />
+      <input formControlName="email" name="email" required />
+
+      @if(email?.touched && email?.hasError('required')){
+        <p class="error">
+          L'email' est requis
+        </p>
+      }
+
+      @if(email?.touched && email?.hasError('email')){
+        <p class="error">
+          Le format de l'email est incorrect
+        </p>
+      }
     </div>
 
     <div class="form-group">
-      <label>Password</label>
-      <input type="password" [(ngModel)]="password" name="password" required />
+      <label>Mot de passe</label>
+      <input type="password" formControlName="password" name="password" required />
+      @if(password?.touched && password?.hasError('required')){
+        <p class="error">
+          Le mot de passe est requis
+        </p>
+      }
+      @if(password?.touched && password?.hasError('minlength')){
+        <p class="error">
+          8 caractères minimum requis
+        </p>
+      }
+      @if(password?.touched && password?.hasError('weakPassword')){
+        <p class="error">
+          Le mot de passe doit inclure 1 majuscule, 1 chiffre et 1 caractère spécial
+        </p>
+      }
     </div>
 
     <div class="form-group">
-      <button class="btn-primary" type="submit">
+      <label>Confirmation Mot de passe</label>
+      <input type="password" formControlName="confirmPassword" name="confirmPassword" required />
+
+      @if(password?.touched && password?.hasError('required')){
+        <p class="error">
+          La confirmation du mot de passe est requise
+        </p>
+      }
+
+      @if(password?.touched && password?.hasError('passwordMismatch')){
+        <p class="error">
+          Le mot de passe et sa confirmation ne correspondent pas
+        </p>
+      }
+    </div>
+
+    <div class="form-group">
+      <button type="submit"
+              [disabled]="registerForm.invalid"
+              [class.disabled-btn]="registerForm.invalid"
+              [class.active-btn]="registerForm.valid">
         Je crée mon compte
       </button>
     </div>
 
     @if(success) {
-      <p class="success">User created successfully!</p>
+      <p class="success">Compte ({{ userPrincipalName }}) créé avec success!</p>
     }
     @if(error) {
       <p class="error">{{ error }}</p>

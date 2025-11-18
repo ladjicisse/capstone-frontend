@@ -2,9 +2,9 @@
   <header>
     <div class="logo"><a aria-label="{{title()}}" routerLink="/">{{title()}}</a></div>
     <div class="search">
-      <input aria-label="Search products"
+      <input aria-label="Recherche products..."
              type="text"
-             placeholder="Search products..."
+             placeholder="Recherche products..."
              [value]="searchTerm()"
              (input)="onSearch($event)"
 
@@ -27,19 +27,19 @@
           aria-label="Logout"
           rel="noopener"
           (click)="logout()"
-        >Logout</a>
+        >Déconnexion</a>
       }
       @else {
         <a
           aria-label="Register"
           rel="noopener"
           routerLink="/register"
-        >Registration</a>
+        >Inscription</a>
         <a
           aria-label="Login"
           rel="noopener"
           (click)="login()"
-        >Login</a>
+        >Connexion</a>
       }
     </nav>
   </header>
@@ -51,13 +51,13 @@
   <footer>
     <div class="footer-left">
       <div class="logo"><a aria-label="Ladji Cissé" target="_blank" href="https://ladjicisse.com">Ladji Cissé</a></div>
-      <span>© 2025 All rights reserved</span>
+      <span>© 2025 Tous droits reservés</span>
     </div>
 
     <div class="footer-links">
-      <a aria-label="Privacy" routerLink="/">Privacy Policy</a>
-      <a aria-label="Help" routerLink="/">Help</a>
-      <a aria-label="Source codes" href="https://github.com/ladjicisse/capstone-frontend" target="_blank">Source codes</a>
+      <a aria-label="Privacy" routerLink="/">Mentions légales</a>
+      <a aria-label="Help" routerLink="/">Aide</a>
+      <a aria-label="Source codes" href="https://github.com/ladjicisse/capstone-frontend" target="_blank">Code sources</a>
     </div>
   </footer>
 </div>
