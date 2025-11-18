@@ -1,5 +1,5 @@
 import {Component, computed, inject, OnInit, signal} from '@angular/core';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {AuthService} from './services/auth.service';
 import {AsyncPipe} from '@angular/common';
 import {BasketStore} from './store/basket.store';
@@ -9,7 +9,7 @@ import {MsalService} from '@azure/msal-angular';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, AsyncPipe, FormsModule],
+  imports: [RouterOutlet, RouterLink, AsyncPipe, FormsModule, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

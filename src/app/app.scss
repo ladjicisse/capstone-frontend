@@ -1,0 +1,19 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.nav-links a {
+  padding: $space-xs $space-sm;
+  font-weight: $font-weight-bold;
+  color: $color-text;
+  transition: color 0.2s ease;
+
+  &.active {
+    color: $color-primary;
+    border-bottom: 1px dashed $color-primary;
+  }
+
+  &:hover {
+    color: $color-primary;
+    border-bottom: 1px solid $color-primary;
+  }
+}
