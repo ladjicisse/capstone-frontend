@@ -20,7 +20,7 @@
 
       <img [src]="item.product.image"
            [alt]="item.product.name"
-           class="item-photo" />
+           class="item-photo" (click)="goToDetail(item.product.id)" />
 
       <div class="item-info">
         <h3 class="item-title">{{ item.product.name }}</h3>

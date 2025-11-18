@@ -5,6 +5,10 @@
   padding-top: $space-xl;
   padding-bottom: $space-xl;
 
+  img:hover{
+    cursor: pointer;
+  }
+
   .page-title {
     text-align: center;
     margin-bottom: $space-xl;

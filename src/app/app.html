@@ -7,11 +7,10 @@
              placeholder="Recherche products..."
              [value]="searchTerm()"
              (input)="onSearch($event)"
-
       />
     </div>
     <nav class="nav-links">
-      <a routerLink="/basket" class="basket-icon">
+      <a routerLink="/basket"  routerLinkActive="active" class="basket-icon">
         🛒
         <span class="count">{{ basketItemsCount() }}</span>
       </a>

@@ -1,10 +1,11 @@
 import {Component, signal} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {CurrencyPipe} from '@angular/common';
 import {ProductModel} from '../../models/product.model';
 import {FormsModule} from '@angular/forms';
 import {BasketStore} from '../../store/basket.store';
 import {ProductService} from '../../services/product.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,13 +19,12 @@ import {ProductService} from '../../services/product.service';
 export class ProductDetail {
   public product = signal<ProductModel | null>(null);
   public quantity = signal(0);
- // private ProductType: "Detox" | "Hydration" | "Vitamins";
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
     private basketStore: BasketStore,
-    private router: Router
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -40,11 +40,6 @@ export class ProductDetail {
     if (this.quantity() >= 1) this.quantity.update(qty => qty - 1);
   }
 
-  updateQty(value: number) {
-    const qty = Number(value);
-    this.quantity.set(qty > 0 ? qty : 1);
-  }
-
   addToBasket() {
     this.basketStore.add(this.product() as ProductModel, this.quantity());
 
@@ -52,6 +47,6 @@ export class ProductDetail {
   }
 
   goBack() {
-    this.router.navigate(['/']);
+    this.location.back();
   }
 }

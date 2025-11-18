@@ -56,6 +56,11 @@ export class Basket {
     this.router.navigate(['/']);
   }
 
+  protected goToDetail(id: number) {
+    console.log('Navigating to product detail for ID:', id);
+    this.router.navigate(['/products', id]);
+  }
+
   payNow() {
     alert('Payment process not implemented yet 🚀');
   }
