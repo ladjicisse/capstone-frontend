@@ -40,9 +40,13 @@
 
         <!-- Add to basket -->
         <button (click)="addToBasket()"
-                class="btn-primary add-btn">
+                [disabled]="quantity() <= 0"
+                [class.disabled-btn]="quantity() <= 0"
+                [class.active-btn]="quantity() > 0"
+                class="btn-primary">
           Ajouter au panier
         </button>
+
       </div>
     </div>
   </div>

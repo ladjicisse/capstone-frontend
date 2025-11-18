@@ -37,7 +37,7 @@ export class ProductDetail {
   }
 
   decreaseQty() {
-    if (this.quantity() > 1) this.quantity.update(qty => qty - 1);
+    if (this.quantity() >= 1) this.quantity.update(qty => qty - 1);
   }
 
   updateQty(value: number) {
