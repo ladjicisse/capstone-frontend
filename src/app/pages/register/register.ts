@@ -95,6 +95,8 @@ export class Register {
       await this.usersService.createUser({
         displayName: `${this.firstname?.value} ${this.lastname?.value}`,
         mailNickname: mailNickname,
+        givenName: this.firstname?.value,
+        surname: this.lastname?.value,
         userPrincipalName: this.userPrincipalName,
         password: this.password?.value
       });

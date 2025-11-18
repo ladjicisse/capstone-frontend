@@ -28,6 +28,8 @@ export class UserService {
   async createUser(user: {
     displayName: string;
     mailNickname: string;
+    givenName: string;
+    surname: string;
     userPrincipalName: string;
     password: string;
   }) {
@@ -54,6 +56,8 @@ export class UserService {
       accountEnabled: true,
       displayName: user.displayName,
       mailNickname: user.mailNickname,
+      givenName: user.givenName,
+      surname: user.surname,
       userPrincipalName: user.userPrincipalName,  // ex: newuser@tenant.onmicrosoft.com
       passwordProfile: {
         forceChangePasswordNextSignIn: false,
