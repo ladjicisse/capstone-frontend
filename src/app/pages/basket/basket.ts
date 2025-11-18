@@ -25,7 +25,7 @@ export class Basket {
   items = computed(()=> this.basketStore.items());// signal
   totalAmount = computed( () => this.basketStore.totalAmount());   // computed
 
-  protected searchTerm = computed(() => this.searchService.query());
+  searchTerm = computed(() => this.searchService.query());
 
   increaseQty(i: number) {
     const item = this.items()[i];
@@ -56,7 +56,7 @@ export class Basket {
     this.router.navigate(['/']);
   }
 
-  protected goToDetail(id: number) {
+  goToDetail(id: number) {
     console.log('Navigating to product detail for ID:', id);
     this.router.navigate(['/products', id]);
   }
